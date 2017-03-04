@@ -1,0 +1,4 @@
+/vendor/
+/report/
+phpunit.xml
+.php_cs.cache

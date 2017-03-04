@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         beStrictAboutOutputDuringTests="true"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         failOnRisky="true"
+         failOnWarning="true"
+         processIsolation="false"
+         stopOnError="false"
+         stopOnFailure="false"
+         syntaxCheck="true"
+         verbose="true"
+        >
+    <testsuite name="unit">
+        <directory suffix="Test.php">./tests/Unit/</directory>
+    </testsuite>
+    <testsuite name="functional">
+        <directory suffix="Test.php">./tests/Functional/</directory>
+    </testsuite>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+    <php>
+    <!--
+        <env name="ONTRAPORT_ID" value=""/>
+        <env name="ONTRAPORT_KEY" value=""/>
+     -->
+    </php>
+    <logging>
+      <log type="coverage-html" target="./report" lowUpperBound="35"
+           highLowerBound="70"/>
+    </logging>
+</phpunit>

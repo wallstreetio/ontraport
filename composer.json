@@ -1,0 +1,33 @@
+{
+    "name": "wallstreetio/ontraport",
+    "description": "A PHP package to easily integrate the Ontraport API.",
+    "require": {
+        "php": ">=5.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "mockery/mockery": "^0.9.9",
+        "friendsofphp/php-cs-fixer": "^2.1"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Wsio\\Tests\\Ontraport\\": "tests/"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Wsio\\Ontraport\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tamer Ashkar",
+            "email": "tashkar18@gmail.com"
+        }
+    ],
+    "scripts": {
+        "post-install-cmd": [
+            "bash build/setup.sh"
+        ]
+    }
+}
