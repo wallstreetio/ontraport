@@ -7,8 +7,6 @@ use Wsio\Tests\Ontraport\TestCase as OntraportTests;
 
 class TestCase extends OntraportTests
 {
-    protected $client;
-
     protected $ontraport;
 
     public function setUp()

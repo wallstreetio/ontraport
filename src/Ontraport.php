@@ -3,7 +3,6 @@
 namespace Wsio\Ontraport;
 
 use ArrayAccess;
-use Wsio\Ontraport\Resources\Task;
 use Wsio\Ontraport\Contracts\Client;
 use Wsio\Ontraport\Resources\Object;
 use Wsio\Ontraport\Clients\CurlClient;
@@ -18,9 +17,9 @@ class Ontraport implements ArrayAccess
     protected $client;
 
     /**
-     * The list of Ontraport objects.
+     * The Ontraport objects.
      *
-     * @var array
+     * @var \Wsio\Ontraport\Objects
      */
     protected $objects;
 
@@ -178,8 +177,8 @@ class Ontraport implements ArrayAccess
     /**
      * Extend an Ontraport object.
      *
-     * @param  string    $name
-     * @param  callable  $value
+     * @param  string  $name
+     * @param  mixed   $value
      * @return $this
      */
     public function extend($name, $value)

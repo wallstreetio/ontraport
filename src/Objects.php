@@ -7,7 +7,7 @@ use Wsio\Ontraport\Exceptions\InvalidCustomObject;
 class Objects
 {
     /**
-     * The array of Ontraport objects.
+     * The list of Ontraport objects.
      *
      * @var array
      */

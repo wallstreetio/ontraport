@@ -14,7 +14,7 @@
          stopOnFailure="false"
          syntaxCheck="true"
          verbose="true"
-        >
+>
     <testsuite name="unit">
         <directory suffix="Test.php">./tests/Unit/</directory>
     </testsuite>

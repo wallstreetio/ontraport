@@ -14,14 +14,14 @@ class Resource
     protected $ontraport;
 
     /**
-     * The start/from position for the request.
+     * The start position for the request.
      *
      * @var int
      */
     protected $start;
 
     /**
-     * The range/limit of items for the request.
+     * The number of items to return for the request.
      *
      * @var int
      */
@@ -42,21 +42,21 @@ class Resource
     protected $sortDirection;
 
     /**
-     * Search for string.
+     * The string to search for in the object.
      *
      * @var string
      */
     protected $search;
 
     /**
-     * Boolean flag to additionally search Object Notes for the Search term given in Search parameter.
+     * Boolean flag to additionally search Object Notes.
      *
      * @var bool
      */
     protected $searchNotes;
 
     /**
-     * The query conditional.
+     * The query constraints.
      *
      * @var array
      */

@@ -44,7 +44,7 @@ class CurlClient implements Client
     /**
      * Send an API request to Ontraport.
      *
-     * @see  https://github.com/Ontraport/ontra_api_examples/blob/master/contacts_add_contact.php
+     * @see https://github.com/Ontraport/ontra_api_examples/blob/master/contacts_add_contact.php
      * @param  string  $method
      * @param  string  $uri
      * @param  array   $data

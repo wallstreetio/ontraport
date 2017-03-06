@@ -35,7 +35,7 @@ class Object extends Resource
     }
 
     /**
-     * Retreive the Ontraport Object id.
+     * Retrieve the Ontraport Object id.
      *
      * @return int
      */
@@ -45,7 +45,7 @@ class Object extends Resource
     }
 
     /**
-     * Tag an Ontraport Object.
+     * Tag one or many Ontraport Object(s).
      *
      * @param  mixed  $ids
      * @param  mixed $tags
