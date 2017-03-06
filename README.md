@@ -34,7 +34,7 @@ $ontraport = new \Wsio\Ontraport\Ontraport('APP_ID', 'APP_KEY');
 
 The Ontraport API provides a fluent, query builder syntax that you might be used to from the popular `Eloquent` ORM.
 
-In the examples below, we will be focusing on the Contacts endpoint in Ontraport, but the same syntax can apply to any of the [Ontraport objects](list-of-provided-ontraport-objects).
+In the examples below, we will be focusing on the Contacts endpoint in Ontraport, but the same syntax can apply to any of the [Ontraport objects](#list-of-provided-ontraport-objects).
 
 #### List Objects
 
@@ -48,12 +48,12 @@ You may wish to add constraints to the query to retrieve a subset of the objects
 
 ```php
 $contacts = $ontraport->contacts
-    ->where('firstname', 'Tamer')
+    ->where('firstname', 'Bob')
     ->orderBy('id')
     ->get();
 ```
 
-In the above example, we fetched all the contacts with the firstname, Tamer, in ascending order sorted by the `id` field.
+In the above example, we fetched all the contacts with the firstname, Bob, in ascending order sorted by the `id` field.
 
 #### Find Object
 
@@ -175,7 +175,7 @@ In the above example, we grabbed all the `active` contacts without a `firstname`
 
 ## List of Provided Ontraport Objects
 
-For the full list of objects that Ontraport provides and better documentation for each of the endpoints, please refer the [Ontraport Documentation](http://api.ontraport.com/doc/#/).
+For the full list of objects that Ontraport provides and better documentation for each of the endpoints, please refer to the [Ontraport Documentation](http://api.ontraport.com/doc/#/).
 
 * Contacts
 * Tasks
@@ -236,7 +236,7 @@ $ontraport->tasks->assign([
 ]);
 ```
 
-Likewise, this approach can be used for objects that this package does not offer in the list [above](list-of-provided-ontraport-objects).
+Likewise, this approach can be used for objects that this package does not offer in the list [above](#list-of-provided-ontraport-objects).
 
 In most cases this can be a little much especially for one-off requests. The Ontraport instance provides `get`, `post`, `put`, and `delete` helper methods that you can utilize instead.
 
