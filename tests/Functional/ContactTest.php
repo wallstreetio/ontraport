@@ -7,8 +7,7 @@ class ContactTest extends TestCase
     public function testCreate()
     {
         $contact = $this->ontraport->contacts->create([
-            'firstname' => 'Tamer',
-            'lastname' => 'Ashkar'
+            'firstname' => 'Tamer', 'lastname' => 'Ashkar'
         ]);
 
         $this->assertNotNull($contact->id);
@@ -23,10 +22,12 @@ class ContactTest extends TestCase
     {
         $contact = $this->ontraport->contacts
             ->where('firstname', 'Tamer')
+            ->where('lastname', 'Ashkar')
             ->orderByDesc('id')
             ->first();
 
         $this->assertNotNull($contact->id);
+        $this->assertEquals($id, $contact->id);
     }
 
     /**
@@ -43,14 +44,21 @@ class ContactTest extends TestCase
         $this->assertEquals($object->email, 'dev@wallstreet.io');
     }
 
-    public function testSaveOrUpdate()
+    /**
+     * @depends testCreate
+     */
+    public function testSaveOrUpdate($id)
     {
         $contact = $this->ontraport->contacts->saveOrUpdate([
             'email' => 'dev@wallstreet.io',
             'firstname' => 'changed'
         ]);
 
-        $this->assertNull($contact->id);
+        $contact = $this->ontraport->contacts->where('firstname', 'changed')->first();
+        $this->assertNotNull($contact);
+
+        $contacts = $this->ontraport->contacts->where('email', 'dev@wallstreet.io')->get();
+        $this->assertEquals(count($contacts), 1);
     }
 
     /**
@@ -82,6 +90,34 @@ class ContactTest extends TestCase
         $this->assertTrue($this->ontraport->contacts->delete($id));
 
         $this->ontraport->contacts->find($id);
+    }
+
+    public function testDeleteMany()
+    {
+        $contact = $this->ontraport->contacts->create([
+            'firstname' => 'New', 'lastname' => 'Guy'
+        ]);
+
+        $contact2 = $this->ontraport->contacts->create([
+            'firstname' => 'New', 'lastname' => 'Girl'
+        ]);
+
+        $this->assertTrue($this->ontraport->contacts->delete([$contact->id, $contact2->id]));
+
+        $this->ontraport->contacts->create([
+            'firstname' => 'New', 'lastname' => 'Person'
+        ]);
+
+        $this->ontraport->contacts->create([
+            'firstname' => 'Newest', 'lastname' => 'Person'
+        ]);
+
+        $this->assertEquals(count($this->ontraport->contacts->where('lastname', 'Person')->get()), 2);
+        $this->assertTrue($this->ontraport->contacts->where('firstname', 'New')->where('lastname', 'Person')->delete());
+        $this->assertEquals(count($this->ontraport->contacts->where('lastname', 'Person')->get()), 1);
+
+        $this->assertTrue($this->ontraport->contacts->delete());
+        $this->assertEquals(count($this->ontraport->contacts->get()), 0);
     }
 
     public function testInfo()
