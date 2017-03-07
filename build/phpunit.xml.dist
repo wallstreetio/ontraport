@@ -28,8 +28,8 @@
     </filter>
     <php>
     <!--
-        <env name="ONTRAPORT_ID" value=""/>
-        <env name="ONTRAPORT_KEY" value=""/>
+        <env name="ONTRAPORT_APP_ID" value=""/>
+        <env name="ONTRAPORT_API_KEY" value=""/>
      -->
     </php>
     <logging>

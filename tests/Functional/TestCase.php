@@ -11,8 +11,8 @@ class TestCase extends OntraportTests
 
     public function setUp()
     {
-        $id = getenv('ONTRAPORT_ID');
-        $key = getenv('ONTRAPORT_KEY');
+        $id = getenv('ONTRAPORT_APP_ID');
+        $key = getenv('ONTRAPORT_API_KEY');
 
         if (!$id || !$key) {
             $this->markTestSkipped(
