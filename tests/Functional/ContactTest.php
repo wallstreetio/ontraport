@@ -6,6 +6,8 @@ class ContactTest extends TestCase
 {
     public function testCreate()
     {
+        $this->assertTrue($this->ontraport->contacts->delete());
+
         $contact = $this->ontraport->contacts->create([
             'firstname' => 'Tamer', 'lastname' => 'Ashkar'
         ]);
@@ -92,6 +94,9 @@ class ContactTest extends TestCase
         $this->ontraport->contacts->find($id);
     }
 
+    /**
+     * @depends testCreate
+     */
     public function testDeleteMany()
     {
         $contact = $this->ontraport->contacts->create([
