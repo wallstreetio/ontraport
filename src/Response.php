@@ -54,8 +54,8 @@ class Response
         if (!empty($this->response['data'])) {
             $data = [];
 
-            foreach ($this->response['data'] as $resource) {
-                $data[] = new Fluent($this->resource, $resource);
+            foreach ($this->response['data'] as $object) {
+                $data[] = new Fluent($this->resource, $object);
             }
 
             return $data;

@@ -64,7 +64,8 @@ class Ontraport implements ArrayAccess
     public function __construct($id, $key, $client = null)
     {
         $this->objects = new Objects($this->defaults);
-        $this->client = $client ?: new CurlClient($id, $key);
+
+        $this->setClient($client ?: new CurlClient($id, $key));
 
         $this->addDefaultExtensions();
     }
@@ -112,7 +113,7 @@ class Ontraport implements ArrayAccess
      * @param  array   $data
      * @return array
      */
-    public function get($uri, array $data)
+    public function get($uri, array $data = [])
     {
         return $this->client->request('GET', $uri, $data);
     }
