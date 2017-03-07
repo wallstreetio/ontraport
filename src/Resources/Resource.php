@@ -173,14 +173,12 @@ class Resource
      */
     public function delete($id = null)
     {
-        if (is_array($id)) {
+        if (is_null($id) || is_array($id)) {
             return $this->deleteMany($id);
         }
 
-        $namespace = $id ? $this->getSingularNamespace() : $this->getNamespace();
-
         $response = $this->ontraport->delete(
-            $namespace, $this->toArray(compact('id'))
+            $this->getSingularNamespace(), $this->toArray(compact('id'))
         );
 
         return $this->ontraport->item($this, $response);
@@ -192,17 +190,28 @@ class Resource
      * @param  array  $ids
      * @return \Wsio\Ontraport\Fluent
      */
-    public function deleteMany(array $ids)
+    public function deleteMany($ids = null)
     {
-        $parameters = [
-            'ids' => implode(',', $ids)
-        ];
+        if (is_null($ids)) {
+            $parameters = [
+                'performAll' => true
+            ];
+        } else {
+            $parameters = [
+                'ids' => implode(',', (array) $ids),
+            ];
+        }
 
         $response = $this->ontraport->delete(
             $this->getNamespace(), $this->toArray($parameters)
         );
 
-        return $this->ontraport->item($this, $response);
+        // When deleting many objects, we get a string for the data field in the response,
+        // saying "Deleted". When an object does not exist, it is ignored by oap. I believe
+        // its safe to assume that we can always return successfuly here. Unless we receive
+        // a non 200 status code in which case an InvalidRequest would be thrown.
+
+        return true;
     }
 
     /**
@@ -229,7 +238,7 @@ class Resource
      */
     public function info()
     {
-        return $this->ontraport->get('objects/getInfo', $this->toArray());
+        return $this->ontraport->get($this->getNamespace() . '/getInfo', $this->toArray());
     }
 
     /**
@@ -240,7 +249,7 @@ class Resource
      */
     public function meta(array $data = [])
     {
-        return $this->ontraport->get('objects/meta', $this->toArray($data));
+        return $this->ontraport->get($this->getNamespace() . '/meta', $this->toArray($data));
     }
 
     /**

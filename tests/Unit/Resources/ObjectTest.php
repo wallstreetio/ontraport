@@ -105,14 +105,13 @@ class ObjectTest extends TestCase
     {
         $this->expect('DELETE', 'objects', [
             'objectID' => 0,
+            'performAll' => true,
             'condition' => json_encode([[
                 'field' => ['field' => 'firstname'], 'op' => '=', 'value' => ['value' => 'tamer']
             ]]),
         ]);
 
-        $this->ontraport->shouldReceive('item')->once();
-
-        $this->resource()->where('firstname', 'tamer')->delete();
+        $this->assertTrue($this->resource()->where('firstname', 'tamer')->delete());
     }
 
     public function testDeleteMany()
@@ -122,9 +121,7 @@ class ObjectTest extends TestCase
             'ids' => 'id1,id2',
         ]);
 
-        $this->ontraport->shouldReceive('item')->once();
-
-        $this->resource()->delete(['id1', 'id2']);
+        $this->assertTrue($this->resource()->delete(['id1', 'id2']));
     }
 
     public function testSaveOrUpdate()
