@@ -1,7 +1,7 @@
 {
     "name": "wallstreetio/ontraport",
     "description": "A PHP package to easily integrate the Ontraport API.",
-    "keywords": ["ontraport", "oap", "api"],
+    "keywords": ["ontraport", "oap", "api", "php"],
     "license": "MIT",
     "require": {
         "php": ">=5.5"
