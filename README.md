@@ -34,7 +34,7 @@ $ontraport = new \Wsio\Ontraport\Ontraport('APP_ID', 'APP_KEY');
 
 The Ontraport API provides a fluent, query builder syntax that you might be used to from the popular `Eloquent` ORM.
 
-In the examples below, we will be focusing on the Contacts endpoint in Ontraport, but the same syntax can apply to any of the [Ontraport objects](#list-of-provided-ontraport-objects).
+In the examples below we will focus on the Contacts endpoint in Ontraport, but the same syntax can apply to any of the [Ontraport objects](#list-of-provided-ontraport-objects).
 
 #### List Objects
 
@@ -54,6 +54,17 @@ $contacts = $ontraport->contacts
 ```
 
 In the above example, we fetched all the contacts with the firstname, Bob, in ascending order sorted by the `id` field.
+
+For pagination, you can limit the number of results to retrieve as well as the offset to start.
+
+```php
+$contacts = $ontraport->contacts
+    ->range(25)
+    ->start(50)
+    ->get();
+```
+
+The above examples will grab 25 contacts offset by the first 50 contacts.
 
 #### Find Object
 
@@ -119,7 +130,7 @@ $contact->save();
 $ontraport->contacts->delete(1);
 ```
 
-Like the update example above, if we already have retrieved the object, we can utilize the `delete` method to remove the object in Ontraport.
+Similary, if we have previously retrieved the object, we can utilize the `delete` method to remove the object in Ontraport.
 
 ```php
 $contact = $ontraport->contacts->find(1);
@@ -250,6 +261,25 @@ $task = $ontraport->post('task/assign', [
 # Documentation
 
 * [Ontraport Documentation](http://api.ontraport.com/doc/#/)
+
+# Tests
+
+To run the testsuite, you will need to clone this repository and install the dev requirements.
+
+```bash
+git clone https://github.com/wallstreetio/ontraport.git ontraport
+cd ontraport
+composer install --dev
+```
+Then you can run the unit tests
+
+```bash
+phpunit
+```
+
+If you want to run the full test suite, you will need to edit your `phpunit.xml` file with the proper `ONTRAPORT_APP_ID` and `ONTRAPORT_API_KEY`.
+
+> *Note: The full testsuite will run tests that will add, change, and delete contacts.* **Make sure you are using a testing account.**
 
 # License
 

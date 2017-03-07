@@ -344,7 +344,7 @@ class Resource
     }
 
     /**
-     * Add a conditional to the query.
+     * Add a constraint to the request query.
      *
      * @param  string  $field
      * @param  string  $operator
@@ -361,9 +361,9 @@ class Resource
             $this->condition[] = $boolean;
         }
 
-        // Here we will make some assumptions about the operator. If only 2 values are
-        // passed to the method, we will assume that the operator is an equals sign
-        // and keep going. Otherwise, we'll require the operator to be passed in.
+        // Here we will make some assumptions about the operator. If only two values
+        // are passed in, we will assume the operator is an equals sign. Furthermore,
+        // we will identify if the value is null and apply the respective operator.
 
         list($value, $operator) = $this->prepareValueAndOperator(
             $value, $operator, func_num_args() == 2
@@ -379,7 +379,7 @@ class Resource
     }
 
     /**
-     * Add an OR conditional to the query.
+     * Add an or constraint to the request query.
      *
      * @param  string  $field
      * @param  string  $operator
@@ -395,7 +395,7 @@ class Resource
     }
 
     /**
-     * Add a null conditional to the query.
+     * Add a null constraint to the request query.
      *
      * @param  string  $field
      * @param  string  $boolean
@@ -407,7 +407,7 @@ class Resource
     }
 
     /**
-     * Add a multiple value conditional to the query.
+     * Add a where in constraint to the request query.
      *
      * @param  string $field
      * @param  array $values
