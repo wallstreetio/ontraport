@@ -236,9 +236,9 @@ class Resource
      *
      * @return array
      */
-    public function info()
+    public function info(array $data = [])
     {
-        return $this->ontraport->get($this->getNamespace() . '/getInfo', $this->toArray());
+        return $this->ontraport->get($this->getNamespace() . '/getInfo', $this->toArray($data));
     }
 
     /**
