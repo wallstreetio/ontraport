@@ -8,6 +8,7 @@ use Wsio\Ontraport\Response;
 use Wsio\Ontraport\Ontraport;
 use Wsio\Tests\Ontraport\TestCase;
 use Wsio\Ontraport\Contracts\Client;
+use Wsio\Ontraport\Resources\Resource;
 
 class OntraportTest extends TestCase
 {
@@ -35,7 +36,7 @@ class OntraportTest extends TestCase
 
     public function testRespond()
     {
-        $response = $this->ontraport->respond('resource', 'response');
+        $response = $this->ontraport->respond(new Resource($this->ontraport), 'response');
 
         $this->assertInstanceOf(Response::class, $response);
     }

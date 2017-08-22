@@ -484,6 +484,23 @@ class Resource
     }
 
     /**
+     * Reset the resource parameters.
+     *
+     * @return $this
+     */
+    public function reset()
+    {
+        $this->start = null;
+        $this->range = null;
+        $this->sort = null;
+        $this->sortDirection = null;
+        $this->search = null;
+        $this->searchNotes = null;
+        $this->condition = null;
+        return $this;
+    }
+
+    /**
      * Retrieve the namespace of the resource.
      *
      * @return string

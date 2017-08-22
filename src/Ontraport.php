@@ -93,7 +93,10 @@ class Ontraport implements ArrayAccess
      */
     public function respond($resource, $response)
     {
-        return new Response($resource, $response);
+        // We will reset the resource to its default values before passing back a response.
+        // This allows us to reuse the resource, without the worry of previous values affecting
+        // any new requests to the resource.
+        return new Response($resource->reset(), $response);
     }
 
     /**

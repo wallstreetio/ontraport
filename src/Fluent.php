@@ -62,7 +62,7 @@ class Fluent implements ArrayAccess, JsonSerializable
      */
     public function delete()
     {
-        return $this->resource->delete();
+        return $this->resource->delete($this->id);
     }
 
     /**

@@ -134,4 +134,33 @@ class ContactTest extends TestCase
     {
         $this->assertInternalType('array', $this->ontraport->contacts->meta());
     }
+
+    public function testFluentSaveUpdateAndDelete()
+    {
+        $this->assertTrue($this->ontraport->contacts->delete());
+        $this->assertEquals(0, count($this->ontraport->contacts->get()));
+
+        $this->ontraport->contacts->create(['firstname' => 'New', 'lastname' => 'Person']);
+        $this->ontraport->contacts->create(['firstname' => 'Newest', 'lastname' => 'Person']);
+
+        $contacts = $this->ontraport->contacts->where('lastname', 'Person')->get();
+
+        $firstPersonName = $contacts[0]->firstname;
+        $contacts[1]->firstname = 'Coolest';
+        $contacts[1]->save();
+
+        $contacts = $this->ontraport->contacts->where('lastname', 'Person')->get();
+        $this->assertEquals(2, count($contacts));
+        $this->assertEquals($firstPersonName, $contacts[0]->firstname);
+        $this->assertEquals('Coolest', $contacts[1]->firstname);
+
+        $contacts = $this->ontraport->contacts->where('lastname', 'Person')->get();
+        $this->assertEquals(2, count($contacts));
+        $remainingContactName = $contacts[1]->firstname;
+        $this->assertTrue($contacts[0]->delete());
+
+        $contacts = $this->ontraport->contacts()->where('lastname', 'Person')->get();
+        $this->assertEquals(1, count($contacts));
+        $this->assertEquals($remainingContactName, $contacts[0]->firstname);
+    }
 }
