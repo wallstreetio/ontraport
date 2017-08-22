@@ -407,10 +407,9 @@ class Resource
      * Add a null constraint to the request query.
      *
      * @param  string  $field
-     * @param  string  $boolean
      * @return $this
      */
-    public function whereNull($field, $boolean = 'and')
+    public function whereNull($field)
     {
         return $this->where($field, null);
     }
@@ -442,14 +441,15 @@ class Resource
      *
      * @param  mixed  $value
      * @param  mixed  $operator
-     * @param  bool   $useDefault
      * @return array
      */
-    protected function prepareValueAndOperator($value, $operator, $useDefault = false)
+    protected function prepareValueAndOperator($value, $operator)
     {
-        if ($useDefault) {
+        if (is_null($value) && ! in_array($operator, ['='])) {
             $value = $operator;
             $operator = '=';
+        } elseif (! in_array($operator, ['='])) {
+            throw new \InvalidArgumentException('Illegal operator and value combination.');
         }
 
         if (is_null($value)) {
