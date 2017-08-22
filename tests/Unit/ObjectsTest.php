@@ -26,6 +26,7 @@ class ObjectsTest extends TestCase
 
         $this->objects->set('third_name', 'id3');
         $this->assertEquals($this->objects->get('third_name'), 'id3');
+        $this->assertEquals($this->objects->get('Third_Name'), 'id3');
     }
 
     /**

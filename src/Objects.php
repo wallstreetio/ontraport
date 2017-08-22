@@ -84,6 +84,7 @@ class Objects
      */
     public function find($name)
     {
+        $name = strtolower($name);
         if (isset($this->objects[$name])) {
             return $this->objects[$name];
         }
