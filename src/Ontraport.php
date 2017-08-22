@@ -42,8 +42,22 @@ class Ontraport implements ArrayAccess
         'products' => 16,
         'purchases' => 17,
         'fulfillments' => 19,
-        'landingPages' => 20,
-        'customObjects' => 99,
+        'landingpages' => 20,
+        'upsellform' => 42,
+        'transaction' => 46,
+        'wordpressmemberships' => 43,
+        'taxes' => 63,
+        'taskoutcomes' => 66,
+        'wordpresssites' => 67,
+        'terms' => 79,
+        'trackedlinks' => 80,
+        'urlhistoryitems' => 88,
+        'tasknotes' => 89,
+        'taskhistoryitems' => 90,
+        'subscriberretentionitem' => 92,
+        'subscriptionsaleitems' => 93,
+        'taxescollecteditems' => 98,
+        'customobjects' => 99,
     ];
 
     /**
@@ -79,7 +93,10 @@ class Ontraport implements ArrayAccess
      */
     public function respond($resource, $response)
     {
-        return new Response($resource, $response);
+        // We will reset the resource to its default values before passing back a response.
+        // This allows us to reuse the resource, without the worry of previous values affecting
+        // any new requests to the resource.
+        return new Response($resource->reset(), $response);
     }
 
     /**

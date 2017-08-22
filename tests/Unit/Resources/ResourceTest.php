@@ -67,9 +67,12 @@ class ResourceTest extends TestCase
     public function testWhere()
     {
         $query = $this->resource();
+        $query2 = $this->resource();
 
         $query->where('id', 1);
+        $query2->where('id', '=', 1);
 
+        $this->assertEquals($query->toArray(), $query2->toArray());
         $this->assertEquals($query->toArray(), [
             'condition' => json_encode([[
                 'field' => ['field' => 'id'], 'op' => '=', 'value' => ['value' => 1]
@@ -89,22 +92,29 @@ class ResourceTest extends TestCase
         ]);
     }
 
-    public function testWhereNull()
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testWhereInvalidOperator()
     {
         $query = $this->resource();
 
-        $query->whereNull('lastname');
+        $query->where('firstname', '>', 'hi');
+        $query->where('firstname', '<', 'hi');
+    }
 
-        $this->assertEquals($query->toArray(), [
-            'condition' => json_encode([[
-                'field' => ['field' => 'lastname'], 'op' => 'IS', 'value' => 'NULL'
-            ]])
-        ]);
-
+    public function testWhereNull()
+    {
         $query = $this->resource();
+        $query2 = $this->resource();
+        $query3 = $this->resource();
 
-        $query->where('lastname', '=', null);
+        $query->whereNull('lastname');
+        $query2->where('lastname', null);
+        $query3->where('lastname', '=', null);
 
+        $this->assertEquals($query->toArray(), $query2->toArray());
+        $this->assertEquals($query->toArray(), $query3->toArray());
         $this->assertEquals($query->toArray(), [
             'condition' => json_encode([[
                 'field' => ['field' => 'lastname'], 'op' => 'IS', 'value' => 'NULL'
@@ -138,6 +148,19 @@ class ResourceTest extends TestCase
                 'field' => ['field' => 'email'], 'op' => '=', 'value' => ['value' => '']
             ], 'OR', [
                 'field' => ['field' => 'email'], 'op' => 'IS', 'value' => 'NULL'
+            ]])
+        ]);
+
+        $query = $this->resource();
+
+        $query->where('email', 'justsaying@fakkeee.com')
+            ->orWhere('email', 'tashkar18@gmail.com');
+
+        $this->assertEquals($query->toArray(), [
+            'condition' => json_encode([[
+                'field' => ['field' => 'email'], 'op' => '=', 'value' => ['value' => 'justsaying@fakkeee.com']
+            ], 'OR', [
+                'field' => ['field' => 'email'], 'op' => '=', 'value' => ['value' => 'tashkar18@gmail.com']
             ]])
         ]);
     }

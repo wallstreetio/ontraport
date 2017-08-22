@@ -236,9 +236,9 @@ class Resource
      *
      * @return array
      */
-    public function info()
+    public function info(array $data = [])
     {
-        return $this->ontraport->get($this->getNamespace() . '/getInfo', $this->toArray());
+        return $this->ontraport->get($this->getNamespace() . '/getInfo', $this->toArray($data));
     }
 
     /**
@@ -407,10 +407,9 @@ class Resource
      * Add a null constraint to the request query.
      *
      * @param  string  $field
-     * @param  string  $boolean
      * @return $this
      */
-    public function whereNull($field, $boolean = 'and')
+    public function whereNull($field)
     {
         return $this->where($field, null);
     }
@@ -442,14 +441,15 @@ class Resource
      *
      * @param  mixed  $value
      * @param  mixed  $operator
-     * @param  bool   $useDefault
      * @return array
      */
-    protected function prepareValueAndOperator($value, $operator, $useDefault = false)
+    protected function prepareValueAndOperator($value, $operator)
     {
-        if ($useDefault) {
+        if (is_null($value) && ! in_array($operator, ['='])) {
             $value = $operator;
             $operator = '=';
+        } elseif (! in_array($operator, ['='])) {
+            throw new \InvalidArgumentException('Illegal operator and value combination.');
         }
 
         if (is_null($value)) {
@@ -481,6 +481,23 @@ class Resource
         ], $data), function ($value) {
             return $value !== null;
         });
+    }
+
+    /**
+     * Reset the resource parameters.
+     *
+     * @return $this
+     */
+    public function reset()
+    {
+        $this->start = null;
+        $this->range = null;
+        $this->sort = null;
+        $this->sortDirection = null;
+        $this->search = null;
+        $this->searchNotes = null;
+        $this->condition = null;
+        return $this;
     }
 
     /**
