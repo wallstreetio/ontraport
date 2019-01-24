@@ -4,7 +4,7 @@ namespace Wsio\Ontraport\Resources;
 
 use Wsio\Ontraport\Ontraport;
 
-class Object extends Resource
+class OntraportObject extends Resource
 {
     /**
      * The id of the Ontraport custom object.

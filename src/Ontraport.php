@@ -4,8 +4,8 @@ namespace Wsio\Ontraport;
 
 use ArrayAccess;
 use Wsio\Ontraport\Contracts\Client;
-use Wsio\Ontraport\Resources\Object;
 use Wsio\Ontraport\Clients\CurlClient;
+use Wsio\Ontraport\Resources\OntraportObject;
 
 class Ontraport implements ArrayAccess
 {
@@ -189,7 +189,7 @@ class Ontraport implements ArrayAccess
 
         $object = is_numeric($object) ? $object : $this->objects->find($object);
 
-        return new Object($this, $object);
+        return new OntraportObject($this, $object);
     }
 
     /**

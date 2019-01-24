@@ -2,9 +2,9 @@
 
 namespace Wsio\Tests\Ontraport\Unit\Resources;
 
-use Wsio\Ontraport\Resources\Object;
+use Wsio\Ontraport\Resources\OntraportObject;
 
-class ObjectTest extends TestCase
+class OntraportObjectTest extends TestCase
 {
     public function testFind()
     {
@@ -194,6 +194,6 @@ class ObjectTest extends TestCase
 
     protected function resource()
     {
-        return $this->newResource(Object::class, 0);
+        return $this->newResource(OntraportObject::class, 0);
     }
 }

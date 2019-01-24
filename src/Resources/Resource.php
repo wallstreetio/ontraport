@@ -366,7 +366,7 @@ class Resource
         // If the developer is adding multiple where statements together,
         // we will enforce that by adding the approriate boolean.
 
-        if (count($this->condition) > 0) {
+        if ($this->condition && count($this->condition) > 0) {
             $this->condition[] = $boolean;
         }
 
