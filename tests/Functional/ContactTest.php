@@ -76,6 +76,16 @@ class ContactTest extends TestCase
     /**
      * @depends testCreate
      */
+    public function testTagByName($id)
+    {
+        $tags =$this->ontraport->contacts->tagByName($id, ['developer2', 'sleeper2']);
+
+        $this->assertInternalType('array', $tags);
+    }
+
+    /**
+     * @depends testCreate
+     */
     public function testUntag($id)
     {
         $tags = $this->ontraport->contacts->untag($id, ['developer', 'sleeper']);

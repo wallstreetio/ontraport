@@ -181,6 +181,17 @@ class OntraportObjectTest extends TestCase
         $this->resource()->tag(['id1', 'id2'], ['tag1', 'tag2']);
     }
 
+    public function testTagByName()
+    {
+        $this->expect('PUT', 'objects/tagByName', [
+            'objectID' => 0,
+            'ids' => ['id1','id2'],
+            'add_names' => ['tagName1','tagName2'],
+        ]);
+
+        $this->resource()->tagByName(['id1','id2'], ['tagName1','tagName2']);
+    }
+
     public function testUntag()
     {
         $this->expect('DELETE', 'objects/tag', [

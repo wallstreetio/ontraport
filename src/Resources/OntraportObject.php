@@ -62,6 +62,23 @@ class OntraportObject extends Resource
     }
 
     /**
+     * Tag one or many Ontraport Object(s).
+     *
+     * @param  mixed  $ids
+     * @param  mixed $tags
+     * @return array
+     */
+    public function tagByName($ids, $tags)
+    {
+        $namespace = $this->getNamespace() . '/tagByName';
+        
+        return $this->ontraport->put($namespace, $this->toArray([
+            'ids' => (array) $ids,
+            'add_names' => (array) $tags,
+        ]));
+    }
+
+    /**
      * Detach a tag(s) from an Ontraport Object(s).
      *
      * @param  mixed  $ids
